@@ -1,0 +1,9 @@
+:root {
+  --background-color: #020202;
+  --white: #f2f2f2;
+}
+
+*{
+  padding: 0;
+  margin: 0;
+}

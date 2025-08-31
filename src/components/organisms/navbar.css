@@ -1,3 +1,45 @@
 .navbar{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3em;
   background: var(--navbar-gradient);
+  border-radius: 0 15px 15px 0;
+  border-right: 3px solid var(--green);
+}
+
+.navbar__title{
+  font-family: 'RubikWetPaint';
+  text-align: center;
+  color: var(--green);
+  margin-top: 2.6em;
+  font-size: 2em;
+  text-shadow:-6px 8px 1px var(--gray) ;
+}
+
+.navbar__menu{
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  margin-top: 2em;
+  text-align: left;
+
+}
+
+.navbar__link{
+  font-family: 'Poppins';
+  font-size: 1.2rem;
+  display: flex;
+  gap: 1em;
+  transition:.3s ease ;
+
+}
+.navbar__link:hover{
+  outline: 1px solid var(--green);
+}
+
+.navbar__item span{
+  color: var(--green);
+  padding: .6em;
+
 }

@@ -1,10 +1,16 @@
 :root {
-  --black: #020202;
-  --white: #f2f2f2;
+  --green: #00FF1E;
+  --blue: #0091FF;
+  --dark-green: #4AA8B6;
+  --black: #030303;
 
+  --navbar-gradient: linear-gradient(90deg,rgba(41, 174, 161, 0.92) 0%, rgba(13, 27, 42, 0.9) 25%, rgba(13, 27, 42, 0.9) 76%, rgba(41, 174, 161, 0.92) 100%); /* TODO: */
+
+  --body-gradient: linear-gradient(0deg,rgba(3, 3, 3, 1) 0%, rgba(64, 74, 77, 1) 51%, rgba(3, 3, 3, 1) 100%);
 }
 
 *{
   padding: 0;
   margin: 0;
+  box-sizing: border-box;
 }

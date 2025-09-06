@@ -1,9 +1,11 @@
 :root {
   --green: #00ff04;
-  --blue: #0091FF;
-  --dark-green: #4AA8B6;
+  --green-shadow: #0c66666f;
+  --blue: #0877cbe9;
+  --dark-green: #14c8c8;
   --black: #030303;
-  --gray: #7c7a7a;
+  --gray: #7c7a7ab4;
+  --white:#FFFCFC;
 
   --navbar-gradient: linear-gradient(90deg, rgb(2, 8, 13) 15%, rgba(6, 80, 72, 0.536)100% , rgb(41, 174, 161) 10%); /* TODO: */
 
@@ -23,10 +25,13 @@
 @font-face {
   font-family: 'Poppins';
   src: url(/public/fonts/Poppins.woff2) format(woff2);
+  font-style: normal;
 }
+
 
 @font-face {
   font-family: 'RubikWetPaint';
   src: url(/public/fonts/RubikWetPaint.woff2) format(woff2);
+  font-style: normal;
 }
 

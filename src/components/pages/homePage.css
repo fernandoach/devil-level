@@ -1,0 +1,83 @@
+.home__section {
+    background-image: url("/HOME.jpg"); 
+    background-size: cover;             
+    background-position: center;        
+    background-repeat: no-repeat;      
+    width: 100%;
+    height: 100vh; 
+    color: var(--blue);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2em;
+}
+.home__section .contain{
+    position: relative;
+}
+
+.contain-title .home__title{
+    font-family: 'RubikWetPaint';
+    font-size: 6.3em;
+    text-shadow:-7px 6px 1px var(--green-shadow) ;
+    color: transparent;
+    -webkit-text-stroke: .2px var(--blue);
+    background-image: linear-gradient( var(--blue));
+    background-repeat: no-repeat;
+    -webkit-background-clip: text;
+    background-position: -20rem 0;
+    animation: homeText 8s linear infinite;
+    animation-delay: 2s;
+}
+
+ .home__title::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    border-right: 3px solid var(--green);
+    z-index: -1;
+    animation: homeCursor 8s linear infinite;
+    animation-delay: 2s;
+}
+@keyframes homeText{
+    0%,
+    10%,
+    100%{
+        background-position: -24rem 0;
+    }
+
+    65%,
+    85%{
+        background-position: 0 0;
+    }
+}
+
+@keyframes homeCursor{
+    0%,
+    10%,
+    100%{
+        width: 0;
+    }
+
+    65%,
+    78%,
+    85%{
+        width: 100;
+        opacity: 1;
+    }
+
+    75%, 
+    81%{
+        opacity: 0;
+    }
+}
+
+.home__paragraph{
+    font-family: 'Poppins';
+    font-size: 2.5em;
+    margin-bottom: -2em;
+    font-weight: bold;
+}

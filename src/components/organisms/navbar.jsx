@@ -1,8 +1,6 @@
 import { Link } from "react-router-dom";
 import "./navbar.css";
 import { FaBook, FaGamepad, FaRankingStar } from "react-icons/fa6";
-import Img from '../../../public/PARTICLE.png'
-
 
 function Navbar() {
   const menu = [
@@ -42,7 +40,7 @@ function Navbar() {
           })
         }
       </ul>
-      <img src={Img} alt="img-decoration" width='320px' />
+      <img src='/PARTICLE.png' alt="img-decoration" width='320px' />
     </nav>
   );
 }

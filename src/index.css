@@ -1,16 +1,32 @@
 :root {
-  --green: #00FF1E;
+  --green: #00ff04;
   --blue: #0091FF;
   --dark-green: #4AA8B6;
   --black: #030303;
+  --gray: #7c7a7a;
 
-  --navbar-gradient: linear-gradient(90deg,rgba(41, 174, 161, 0.92) 0%, rgba(13, 27, 42, 0.9) 25%, rgba(13, 27, 42, 0.9) 76%, rgba(41, 174, 161, 0.92) 100%); /* TODO: */
+  --navbar-gradient: linear-gradient(90deg, rgb(2, 8, 13) 15%, rgba(6, 80, 72, 0.536)100% , rgb(41, 174, 161) 10%); /* TODO: */
 
-  --body-gradient: linear-gradient(0deg,rgba(3, 3, 3, 1) 0%, rgba(64, 74, 77, 1) 51%, rgba(3, 3, 3, 1) 100%);
+  --body-gradient: linear-gradient(0deg,rgba(3, 3, 3, 1) 5%, rgb(59, 70, 73) 50%, rgba(3, 3, 3, 1) 100%);
 }
 
 *{
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
+
 }
+
+/*FONTS*/
+@font-face {
+  font-family: 'Poppins';
+  src: url(/public/fonts/Poppins.woff2) format(woff2);
+}
+
+@font-face {
+  font-family: 'RubikWetPaint';
+  src: url(/public/fonts/RubikWetPaint.woff2) format(woff2);
+}
+

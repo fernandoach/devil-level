@@ -1,0 +1,9 @@
+.gameContent{ 
+  margin: auto;
+  color: var(--white);
+  text-align: center;
+}
+
+.gameContent h1{
+  font-family: "RubikWetPaint";
+}

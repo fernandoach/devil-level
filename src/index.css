@@ -24,14 +24,14 @@
 /*FONTS*/
 @font-face {
   font-family: 'Poppins';
-  src: url(/public/fonts/Poppins.woff2) format(woff2);
+  src: url(/fonts/Poppins.woff2) format(woff2);
   font-style: normal;
 }
 
 
 @font-face {
   font-family: 'RubikWetPaint';
-  src: url(/public/fonts/RubikWetPaint.woff2) format(woff2);
+  src: url(/fonts/RubikWetPaint.woff2) format(woff2);
   font-style: normal;
 }
 

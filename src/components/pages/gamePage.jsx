@@ -1,22 +1,45 @@
-import './gamePage.css'
+import { useEffect } from "react";
+import styles from "./gamePage.module.css";
+import Phaser from "phaser";
+import { MenuScene } from "../scenes/menuScene.js";
+import { Nivel1Scene } from "../scenes/nivel1Scene.js";
+import { NickNameScene, PlayScene } from "../scenes/nicknameScene.js";
 
 function GamePage() {
-  const gameTitle = "APOCALYPSE-le"
+  const gameTitle = "APOCALYPSE-le";
+
+  useEffect(() => {
+    const config = {
+      type: Phaser.AUTO,
+      width: 800,
+      height: 600,
+      parent: "game-container",
+      backgroundColor: "#1d1d1d",
+      dom: {
+        createContainer: true,
+      },
+      physics: {
+        default: "arcade",
+        arcade: { gravity: { y: 300 }, debug: false },
+      },
+      scene: [ Nivel1Scene],
+    };
+
+    const game = new Phaser.Game(config);
+
+    return () => {
+      game.destroy(true);
+    };
+  }, []);
 
   return (
-    <section className='game__section'>
-      <img src="./INSTRUCCIONES.png" alt="game top" className="img__game top" />
-      <div className='container_game'>
-        <h2 className='game__title'>{gameTitle}</h2>
-        <div className="container__Eye">
-          <img src="/JUEGO.png" alt="Eye left" className="img__eye left"/>
-          <img src="/JUEGO.png" alt="Eye right" className="img__eye right"/>
-        </div>
-        <a href='#' className="button__game">Jugar</a>
-      </div>
-      <img src="./INSTRUCCIONES.png" alt="game below" className="img__game below" />
-    </section>
-  )
+    <>
+      <div className={styles.gameContent}>
+        <h2 className="game__title">{gameTitle}</h2>
+        <div id="game-container"></div>
+      </div>{" "}
+    </>
+  );
 }
 
-export { GamePage }
+export { GamePage };

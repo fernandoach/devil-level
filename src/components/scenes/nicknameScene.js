@@ -33,6 +33,7 @@ class NickNameScene extends Phaser.Scene {
             this.game.registry.set("nickname", nickname)
             this.game.registry.set("deathCount", 0);
             this.game.registry.set("score", 0);
+            this.game.registry.set("coins", 0);
             this.scene.start("Nivel1Scene");
           }
         });

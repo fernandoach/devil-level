@@ -15,6 +15,12 @@ class Nivel1Scene extends Phaser.Scene {
         this.scoreText.update()
         this.scene.start('Nivel2Scene');
     }
+    this.handleCoin = () => {
+        const currentScore = Number(this.game.registry.get("score"))
+        this.game.registry.set("score", (currentScore + 5))
+        this.scoreText.setText(`PUNTAJE: ${this.game.registry.get("score")}`);
+        this.coin.destroy()
+    }
   }
 
   preload() {
@@ -38,6 +44,11 @@ class Nivel1Scene extends Phaser.Scene {
     this.load.spritesheet("hero_stopped", "/images/hero_stopped.png", {
       frameWidth: 36, // 👈 ancho de cada frame en tu sprite
       frameHeight: 42, // 👈 alto de cada frame en tu sprite
+    });
+
+    this.load.spritesheet("coin", "/images/coin_animated.png", {
+      frameWidth: 22, // 👈 ancho de cada frame en tu sprite
+      frameHeight: 22, // 👈 alto de cada frame en tu sprite
     });
   }
 
@@ -111,10 +122,25 @@ class Nivel1Scene extends Phaser.Scene {
     const trap = this.physics.add.staticImage(300, 470, "trap");
     trap.setSize(20, 10); 
 
+    this.coin = this.physics.add.staticSprite(400, 300, "coin")
+    this.coin.setSize(20, 20)
+
+    this.anims.create({
+      key: "spin",                 // nombre de la animación
+      frames: this.anims.generateFrameNumbers("coin", { start: 0, end: 3 }),
+      frameRate: 8,                 // velocidad (frames por segundo)
+      repeat: -1                    // -1 = loop infinito
+    });
+
+    this.coin.play("spin");
+
+
     this.physics.add.collider(this.player, trap, this.handleDeath, null, this);
 
     this.physics.add.overlap(this.player, door, this.handleSuccess, null, this);
     
+    this.physics.add.overlap(this.player, this.coin, this.handleCoin, null, this);
+
     this.physics.add.collider(this.player, platforms);
 
     this.cursors = this.input.keyboard.createCursorKeys();

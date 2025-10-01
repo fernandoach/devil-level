@@ -3,7 +3,13 @@ import styles from "./gamePage.module.css";
 import Phaser from "phaser";
 import { MenuScene } from "../scenes/menuScene.js";
 import { Nivel1Scene } from "../scenes/nivel1Scene.js";
-import { NickNameScene, PlayScene } from "../scenes/nicknameScene.js";
+import { NickNameScene } from "../scenes/nicknameScene.js";
+import { GameOverScene } from "../scenes/gameoverScene.js";
+import { Nivel2Scene } from "../scenes/nivel2Scene.js";
+import { Nivel3Scene } from "../scenes/nivel3Scene.js";
+import { Nivel4Scene } from "../scenes/nivel4Scene.js";
+import { Nivel5Scene } from "../scenes/nivel5Scene.js";
+import { Nivel6Scene } from "../scenes/nivel6Scene.js";
 
 function GamePage() {
   const gameTitle = "APOCALYPSE-le";
@@ -22,7 +28,7 @@ function GamePage() {
         default: "arcade",
         arcade: { gravity: { y: 300 }, debug: false },
       },
-      scene: [ Nivel1Scene],
+      scene: [ MenuScene, NickNameScene, Nivel1Scene, Nivel2Scene, Nivel3Scene, Nivel4Scene, Nivel5Scene, Nivel6Scene,  GameOverScene ],
     };
 
     const game = new Phaser.Game(config);
@@ -37,7 +43,7 @@ function GamePage() {
       <div className={styles.gameContent}>
         <h2 className="game__title">{gameTitle}</h2>
         <div id="game-container"></div>
-      </div>{" "}
+      </div>
     </>
   );
 }

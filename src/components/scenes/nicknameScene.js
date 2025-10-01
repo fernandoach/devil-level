@@ -30,32 +30,14 @@ class NickNameScene extends Phaser.Scene {
         button.on("click", () => {
           const nickname = input.node.value;
           if (nickname.trim() !== "") {
-            console.log("Nickname:", nickname);
-            this.scene.start("PlayScene", { nickname });
+            this.game.registry.set("nickname", nickname)
+            this.game.registry.set("deathCount", 0);
+            this.game.registry.set("score", 0);
+            this.scene.start("Nivel1Scene");
           }
         });
       }
     }
 
-    class PlayScene extends Phaser.Scene {
-      constructor() {
-        super("PlayScene");
-      }
 
-      init(data) {
-        this.nickname = data.nickname || "Player";
-      }
-
-      create() {
-        this.add.text(400, 300, `Welcome ${this.nickname}!`, {
-          fontSize: "32px",
-          color: "#00ff00",
-        }).setOrigin(0.5);
-        this.add.text(350, 300, "Start", { fontSize: "32px", fill: "#0f0" })
-      .setInteractive()
-      .on("pointerdown", () => this.scene.start("Nivel1Scene"))
-      }
-    }
-
-
-    export { NickNameScene, PlayScene }
+    export { NickNameScene }

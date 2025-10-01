@@ -1,8 +1,8 @@
 import Phaser from "phaser";
 
-class Nivel1Scene extends Phaser.Scene {
+class Nivel3Scene extends Phaser.Scene {
   constructor() {
-    super("Nivel1Scene");
+    super("Nivel3Scene");
     this.handleDeath = () => {
       const currentDeath = Number(this.game.registry.get("deathCount"))
       this.game.registry.set('deathCount', (currentDeath + 1)); 
@@ -13,7 +13,7 @@ class Nivel1Scene extends Phaser.Scene {
         const currentScore = Number(this.game.registry.get("score"))
         this.game.registry.set('score', (currentScore + 100));
         this.scoreText.update()
-        this.scene.start('Nivel2Scene');
+        this.scene.start('Nivel4Scene');
     }
   }
 
@@ -149,4 +149,4 @@ class Nivel1Scene extends Phaser.Scene {
   }
 }
 
-export { Nivel1Scene };
+export { Nivel3Scene };

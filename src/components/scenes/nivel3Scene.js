@@ -3,65 +3,110 @@ import Phaser from "phaser";
 class Nivel3Scene extends Phaser.Scene {
   constructor() {
     super("Nivel3Scene");
+
     this.handleDeath = () => {
-      const currentDeath = Number(this.game.registry.get("deathCount"))
-      this.game.registry.set('deathCount', (currentDeath + 1)); 
-      this.deathText.update()
+      const currentDeath = Number(this.game.registry.get("deathCount"));
+      this.game.registry.set("deathCount", currentDeath + 1);
+      this.deathText.setText(`MUERTES: ${this.game.registry.get("deathCount")}`);
       this.scene.restart();
-    }
+    };
+
     this.handleSuccess = () => {
-        const currentScore = Number(this.game.registry.get("score"))
-        this.game.registry.set('score', (currentScore + 100));
-        this.scoreText.update()
-        this.scene.start('Nivel4Scene');
-    }
-  }
+      const currentScore = Number(this.game.registry.get("score"));
+      this.game.registry.set("score", currentScore + 100);
+      this.scoreText.setText(`PUNTAJE: ${this.game.registry.get("score")}`);
+      this.scene.start("Nivel4Scene");
+    };
 
-  preload() {
-    this.load.image("sky", "/images/background.png");
-    this.load.image("ground", "/images/ground.png");
-  
-    this.load.image("trap", "/images/spike.png");
-
-    this.load.image("door", "/images/door.png");
-    
-    this.load.spritesheet("hero", "/images/hero.png", {
-      frameWidth: 36, // 👈 ancho de cada frame en tu sprite
-      frameHeight: 42, // 👈 alto de cada frame en tu sprite
-    });
-
-    this.load.spritesheet("hero_sneaking", "/images/hero_sneaking.png", {
-      frameWidth: 36, // 👈 ancho de cada frame en tu sprite
-      frameHeight: 42, // 👈 alto de cada frame en tu sprite
-    });
-
-    this.load.spritesheet("hero_stopped", "/images/hero_stopped.png", {
-      frameWidth: 36, // 👈 ancho de cada frame en tu sprite
-      frameHeight: 42, // 👈 alto de cada frame en tu sprite
-    });
+    this.handleCoin = (player, coin) => {
+      coin.destroy();
+      const currentScore = Number(this.game.registry.get("score"));
+      this.game.registry.set("score", currentScore + 10);
+      this.scoreText.setText(`PUNTAJE: ${this.game.registry.get("score")}`);
+    };
   }
 
   create() {
-    
+    // Fondo
     this.add.image(400, 300, "sky");
 
-    this.deathText = this.add.text(10, 10, `MUERTES: ${this.game.registry.get('deathCount')}`, { fontSize: '16px', fill: '#f11' });
-    
-    this.scoreText = this.add.text(600, 10, `PUNTAJE: ${this.game.registry.get('score')}`, { fontSize: '16px', fill: '#0B7' });
-    
-    this.add.text(600, 100, `NICKNAME: ${this.game.registry.get("nickname")}`, { fontSize: '16px', fill: '#0B7' });
-    
-    const platforms = this.physics.add.staticGroup();
-    platforms.create(400, 568, "ground").setScale(2).refreshBody();
+    // --- Texto UI ---
+    this.deathText = this.add.text(
+      10,
+      10,
+      `MUERTES: ${this.game.registry.get("deathCount")}`,
+      { fontSize: "16px", fill: "#f11" }
+    );
 
-    const door = this.physics.add.staticImage(700, 460, "door");
-    door.setSize(24, 48).setOffset(0, 0);
+    this.scoreText = this.add.text(
+      600,
+      10,
+      `PUNTAJE: ${this.game.registry.get("score")}`,
+      { fontSize: "16px", fill: "#0B7" }
+    );
 
+    // --- Plataformas ---
+    this.platforms = this.physics.add.staticGroup();
+    this.platforms.create(400, 584, "ground").setScale(1).refreshBody();
+    this.platforms.create(200, 450, "ground").setScale(0.5).refreshBody();
+    this.platforms.create(400, 350, "ground").setScale(0.5).refreshBody();
+    this.platforms.create(600, 250, "ground").setScale(0.5).refreshBody();
+    this.platforms.create(950, 430, "ground").setScale(0.5).refreshBody();
 
-    this.player = this.physics.add.sprite(100, 450, "hero");
+    // --- Jugador ---
+    this.player = this.physics.add.sprite(100, 500, "hero");
+    this.player.setBounce(0.2);
+    this.player.setCollideWorldBounds(true);
+    this.player.setOrigin(0.5, 1);
 
-    // Animaciones
-    // Animaciones para hero (movimiento original)
+    this.physics.add.collider(this.player, this.platforms);
+
+    // --- Trampas (invisibles al inicio) ---
+    this.traps = this.physics.add.staticGroup();
+
+    const trap1 = this.traps.create(510, 525, "trap").setVisible(false);
+    trap1.active = false; trap1.body.enable = false;
+
+    const trap5 = this.traps.create(80, 410, "trap").setVisible(false);
+    trap5.active = false; trap5.body.enable = false;
+
+    const trap2 = this.traps.create(480, 310, "trap").setVisible(false);
+    trap2.active = false; trap2.body.enable = false;
+
+    const trap3 = this.traps.create(250, 310, "trap");
+    trap3.active = false; trap3.body.enable = false;
+
+    const trap4 = this.traps.create(600, 210, "trap").setVisible(false);
+    trap4.active = false; trap4.body.enable = false;
+
+    this.physics.add.collider(this.player, this.traps, this.handleDeath, null, this);
+
+    // --- Monedas ---
+    this.coins = this.physics.add.staticGroup();
+    this.coins.create(130, 400, "coin");
+    this.coins.create(300, 300, "coin");
+    this.coins.create(450, 200, "coin");
+    this.coins.create(600, 130, "coin");
+    this.coins.create(750, 350, "coin");
+
+    this.anims.create({
+      key: "spin",
+      frames: this.anims.generateFrameNumbers("coin", { start: 0, end: 3 }),
+      frameRate: 8,
+      repeat: -1,
+    });
+
+    this.coins.children.iterate((coin) => {
+      coin.play("spin");
+    });
+
+    this.physics.add.overlap(this.player, this.coins, this.handleCoin, null, this);
+
+    // --- Puerta ---
+    const door = this.physics.add.staticImage(750, 200, "door");
+    this.physics.add.overlap(this.player, door, this.handleSuccess, null, this);
+
+    // --- Animaciones del jugador ---
     this.anims.create({
       key: "left",
       frames: this.anims.generateFrameNumbers("hero", { start: 0, end: 5 }),
@@ -82,15 +127,6 @@ class Nivel3Scene extends Phaser.Scene {
       repeat: -1,
     });
 
-    // Animaciones para herostop (estado parado)
-    this.anims.create({
-      key: "stop",
-      frames: this.anims.generateFrameNumbers("herostop", { start: 0, end: 1 }), // Ajusta según frames
-      frameRate: 5,
-      repeat: -1,
-    });
-
-    // Animaciones para hero_sneaking (movimiento sigiloso)
     this.anims.create({
       key: "sneaking_left",
       frames: this.anims.generateFrameNumbers("hero_sneaking", { start: 0, end: 5 }),
@@ -104,35 +140,25 @@ class Nivel3Scene extends Phaser.Scene {
       frameRate: 5,
       repeat: -1,
     });
-    
-    this.player.setBounce(0.2);
-    this.player.setCollideWorldBounds(true);
-    
-    const trap = this.physics.add.staticImage(300, 470, "trap");
-    trap.setSize(20, 10); 
 
-    this.physics.add.collider(this.player, trap, this.handleDeath, null, this);
-
-    this.physics.add.overlap(this.player, door, this.handleSuccess, null, this);
-    
-    this.physics.add.collider(this.player, platforms);
-
+    // --- Controles ---
     this.cursors = this.input.keyboard.createCursorKeys();
+    this.shiftKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SHIFT);
   }
 
   update() {
+    // --- Movimiento del jugador ---
     if (this.cursors.left.isDown) {
-      if (this.shiftKey) {
+      if (this.shiftKey.isDown) {
         this.player.setVelocityX(-80);
         this.player.anims.play("sneaking_left", true);
-      } else{
+      } else {
         this.player.setVelocityX(-160);
         this.player.anims.play("left", true);
       }
-      this.player.anims.play("left", true);
     } else if (this.cursors.right.isDown) {
-      if (this.shiftKey) {
-        this.player.setVelocityX(80); // Movimiento más lento para sigilo
+      if (this.shiftKey.isDown) {
+        this.player.setVelocityX(80);
         this.player.anims.play("sneaking_right", true);
       } else {
         this.player.setVelocityX(160);
@@ -146,6 +172,23 @@ class Nivel3Scene extends Phaser.Scene {
     if (this.cursors.up.isDown && this.player.body.touching.down) {
       this.player.setVelocityY(-330);
     }
+
+    // --- Aparición de trampas al acercarse ---
+    this.traps.children.iterate((trap) => {
+      if (!trap.active) {
+        const dist = Phaser.Math.Distance.Between(
+          this.player.x,
+          this.player.y,
+          trap.x,
+          trap.y
+        );
+        if (dist < 60) { // distancia de activación
+          trap.setVisible(true);
+          trap.body.enable = true;
+          trap.active = true;
+        }
+      }
+    });
   }
 }
 

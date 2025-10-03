@@ -28,7 +28,7 @@ function GamePage() {
         default: "arcade",
         arcade: { gravity: { y: 300 }, debug: false },
       },
-      scene: [ MenuScene, NickNameScene, Nivel1Scene, Nivel2Scene, Nivel3Scene, Nivel4Scene, Nivel5Scene, Nivel6Scene,  GameOverScene ],
+      scene: [ MenuScene, NickNameScene, Nivel1Scene, GameOverScene ],
     };
 
     const game = new Phaser.Game(config);

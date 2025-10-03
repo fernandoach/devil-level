@@ -13,7 +13,7 @@ class Nivel1Scene extends Phaser.Scene {
         const currentScore = Number(this.game.registry.get("score"))
         this.game.registry.set('score', (currentScore + 100));
         this.scoreText.update()
-        this.scene.start('Nivel2Scene');
+        this.scene.start('GameOverScene');
     }
     this.handleCoin = () => {
         const currentScore = Number(this.game.registry.get("score"))

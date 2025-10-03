@@ -1,0 +1,119 @@
+.ranking{
+  font-family: 'Poppins';
+  background-image: url('/RANKING.jpg');
+  background-repeat: no-repeat;
+  background-size: cover; 
+  background-position: center;
+  display: flex;
+  flex-direction:column ;
+  align-items: center;
+  padding: 1em;
+  gap: 1em;
+}
+
+.rank__title{
+  font-size: 2.7em;
+  font-family: 'RubikWetPaint';
+  color: var(--green);
+  text-align: center;
+}
+.rank__list{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6em;
+  width: 70%;
+}
+.list__item{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .5em;
+  position: relative;
+  color: var(--white);
+  padding-bottom: 1em;
+}
+
+.rank-second,
+.rank-third{
+  margin-top: 3em;
+}
+
+.img__rank{
+  position: relative;
+}
+
+.contain__num{
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--white);
+  font-size: 1.8em;
+  font-weight: bold;
+  top: 2.5em;
+}
+.top__name{
+  background: #000000;
+  padding: .1em 1em;
+  border-radius: 5px;
+  box-shadow: 0 1px 4px var(--green);
+}
+.top__rank{
+  font-size: 1.5em;
+}
+.top__score{
+  font-size: .8em;
+}
+.coints{
+  margin-top: 1em;
+  display: flex;
+  gap: .2em;
+}
+
+/*
+---------------- TABLA -----------------
+*/
+.table {
+  border-collapse: separate;
+  border-spacing: 0 5px;   
+  width: 80%;
+  max-width: 900px;
+  color: var(--white);
+  text-align: center;
+  box-shadow: 0 2px 10px var(--green);
+  border: 1px solid var(--green);
+}
+
+.titles {
+  background: transparent;
+  color: black;
+  font-size: 1.3em;
+  color: white;
+}
+.row__titles{
+  background-color: rgba(1, 4, 3, 0.604);
+  height: 1.8em;
+}
+
+.column__name{
+  width: 40%;
+}
+.row__values{
+  background: linear-gradient(80deg, #095a6a, #04191E);
+  height: 2.3em;
+  border-radius: 5px;
+  font-size: .8em;
+  font-weight: 600;
+}
+
+.rank{
+  background: var(--green);
+  color: black;
+  font-weight: bold;
+  width: 4em;
+  font: 1.5em;
+}
+.table__coins{
+  margin-left: 4px;
+}

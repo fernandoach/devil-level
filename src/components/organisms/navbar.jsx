@@ -30,7 +30,7 @@ function Navbar() {
         {
           menu.map((item) => {
             return(
-              <li className="navbar__item">
+              <li key={item.text} className="navbar__item">
                 <Link className="navbar__link" to={item.href}>
                   <span>{item.icon}</span>
                   <span>{item.text}</span>
